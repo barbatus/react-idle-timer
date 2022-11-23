@@ -398,6 +398,7 @@ export function useIdleTimer ({
     remaining.current = 0
     promptTime.current = 0
     startTime.current = now()
+    idleTime.current = 0;
     lastReset.current = now()
 
     if (manager.current && !remote) {
@@ -631,7 +632,7 @@ export function useIdleTimer ({
   const getTotalActiveTime = useCallback<() => number>((): number => {
     const total = Math.round(getTotalElapsedTime() - getTotalIdleTime())
     return total >= 0 ? total : 0
-  }, [startTime, lastIdle, idleTime])
+  }, [startTime, lastIdle, idleTime, getTotalElapsedTime, getTotalIdleTime])
 
   // On Mount
   useEffect(() => {
